@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
-export default () => {
+export default function App() {
   return (
     <div>
       <h1>Bookkeeper</h1>
@@ -32,4 +32,4 @@ export default () => {
       <Outlet />
     </div>
   );
-};
+}

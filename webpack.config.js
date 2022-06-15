@@ -1,10 +1,19 @@
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = () => {
   const config = {
-    entry: "./src/main",
+    mode: 'development',
+    entry: {
+      refreshEntry: '@pmmmwh/react-refresh-webpack-plugin/client/ReactRefreshEntry.js',
+      app: "./src/main",
+    },
     output: {
-      filename: "bundle.js",
+      filename: "[name].js",
+    },
+    externals: {
+      react: 'React',
+      'react-dom': 'ReactDOM',
     },
     module: {
       rules: [
@@ -28,6 +37,9 @@ module.exports = () => {
                       regenerator: true,
                     },
                   ],
+                  require.resolve(
+                    'react-refresh/babel'
+                  )
                 ],
               },
             },
@@ -43,15 +55,31 @@ module.exports = () => {
       compress: true,
       port: 9000,
       host: "0.0.0.0",
-      open: true,
+      // open: true,
+      hot: true,
       client: {
         overlay: false,
         progress: true,
       },
     },
+    optimization: {
+      runtimeChunk: 'single',
+      // Ensure `react-refresh/runtime` is hoisted and shared
+      // Could be replicated via a vendors chunk
+      splitChunks: {
+        minSize: 1024 * 1024 * 1024 * 1024, // 1TB，意为不拆分 chunk
+        chunks: 'all',
+        name(_, __, cacheGroupKey) {
+          return cacheGroupKey;
+        },
+      },
+    },
     plugins: [
+      new ReactRefreshWebpackPlugin(),
       new HtmlWebpackPlugin({
-        template: "template/index.html",
+        template: "template/index.ejs",
+        filename: './index.html',
+        inject: false,
       }),
     ],
   };

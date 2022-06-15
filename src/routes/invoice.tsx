@@ -2,7 +2,7 @@ import React from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { getInvoice, deleteInvoice } from "../data";
 
-export default () => {
+const Invoice = () => {
   let navigate = useNavigate();
   let location = useLocation();
   let params = useParams();
@@ -27,3 +27,5 @@ export default () => {
     </main>
   );
 };
+
+export default Invoice;

@@ -7,7 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-export default () => {
+export default function Invoices() {
   let invoices = getInvoices();
   let [searchParams, setSearchParams] = useSearchParams();
   return (
@@ -53,7 +53,7 @@ export default () => {
       <Outlet />
     </div>
   );
-};
+}
 
 function QueryNavLink({ to, ...props }) {
   let location = useLocation();

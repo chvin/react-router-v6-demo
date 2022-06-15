@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React Router Demo</title>
+</head>
+<body>
+  <div id="root"></div>
+  <%= htmlWebpackPlugin.files.js.filter(name => name !== 'app.js').map(name => `<script src="${name}"></script>`).join('\n') %>
+  <script src="//g.alicdn.com/code/lib/??react/16.13.1/umd/react.development.js,react-dom/16.13.1/umd/react-dom.development.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
